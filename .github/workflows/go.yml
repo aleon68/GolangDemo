@@ -17,12 +17,12 @@ jobs:
           go-version: ${{ matrix.go-version }}
       - name: Build binary
         run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -o main lambdaTest.go && zip main.zip main
+          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -o main lambdaTest.go && zip test.zip main
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
-          function_name: main
-          zip_file: main.zip
+          function_name: test
+          zip_file: test.zip
